@@ -1,8 +1,13 @@
-var pomodoro = 10;
-var shortBreak = "05";
+var pomodoro = 25;
+var shortBreak = 5;
 var longBreak = 15;
 
 var totalSession = 0;
+
+playAlarm = () => {
+    var audio = new Audio("kururin.mp3"); //Ganti ke link
+    audio.play();
+}
 
 isWork = true;
 const pomodoroSession = document.getElementById("pomodoro-session");
@@ -27,9 +32,10 @@ window.onload = () => {
 
     startButton.addEventListener("click", () => {
         if(isWork){
-        let seconds = "3";
-        let minute = mode - 1;
-    
+            
+        minute =  mode < 11? "0" + (mode-1) : mode-1;
+        let seconds = "59";
+        
         timeFunction = setInterval(function () {
             document.getElementById("minute").innerHTML = minute;
             document.getElementById("second").innerHTML = seconds;
@@ -45,13 +51,19 @@ window.onload = () => {
                 if(totalSession%4 == 0){
                     mode = longBreak;
                     document.getElementById("minute").innerHTML = longBreak;
+                    pomodoroSession.classList.remove("activate");
+                    shortBreakSession.classList.remove("activate");
+                    longBreakSession.classList.add("activate");
                     seconds = "00";
                 }
                 else{
                     mode = shortBreak;
                     document.getElementById("minute").innerHTML = shortBreak;
+                    pomodoroSession.classList.remove("activate");
+                    shortBreakSession.classList.add("activate");
                     seconds = "00";
                 }
+                playAlarm();
                 clearInterval(timeFunction);
 
             }
@@ -66,9 +78,9 @@ window.onload = () => {
     }
 
     if(!isWork){
-        let seconds = "3";
-        let minute = mode - 1;
-    
+        minute =  mode < 11? "0" + (mode-1) : mode-1;
+        let seconds = "59";
+       
         timeFunction = setInterval(function () {
             document.getElementById("minute").innerHTML = minute;
             document.getElementById("second").innerHTML = seconds;
@@ -97,3 +109,38 @@ window.onload = () => {
     }
     });
     
+pomodoroSession.addEventListener("click", () => {
+    clearInterval(timeFunction);
+    mode = pomodoro;
+    document.getElementById("minute").innerHTML = mode;
+    document.getElementById("second").innerHTML = seconds;
+
+    isWork = true;
+    pomodoroSession.classList.add("activate");
+    shortBreakSession.classList.remove("activate");
+    longBreakSession.classList.remove("activate");
+});
+
+shortBreakSession.addEventListener("click", () => {
+    clearInterval(timeFunction);
+    mode = shortBreak;
+    document.getElementById("minute").innerHTML = mode;
+    document.getElementById("second").innerHTML = seconds;
+
+    isWork = false;
+    pomodoroSession.classList.remove("activate");
+    shortBreakSession.classList.add("activate");
+    longBreakSession.classList.remove("activate");
+});
+
+longBreakSession.addEventListener("click", () => {
+    clearInterval(timeFunction);
+    mode = longBreak;
+    document.getElementById("minute").innerHTML = mode;
+    document.getElementById("second").innerHTML = seconds;
+
+    isWork = false;
+    pomodoroSession.classList.remove("activate");
+    shortBreakSession.classList.remove("activate");
+    longBreakSession.classList.add("activate");
+});
