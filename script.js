@@ -5,7 +5,7 @@ var longBreak = 15;
 var totalSession = 0;
 
 playAlarm = () => {
-    var audio = new Audio("kururin.mp3"); //Ganti ke link
+    var audio = new Audio("kururin.mp3"); //Ganti ke link bucket
     audio.play();
 }
 
@@ -14,6 +14,7 @@ const pomodoroSession = document.getElementById("pomodoro-session");
 const shortBreakSession = document.getElementById("short-break-session");
 const longBreakSession = document.getElementById("long-break-session");
 const startButton = document.getElementById("start");
+const pauseButton = document.getElementById("pause");
 let mode;
 let seconds = "00";
 
@@ -31,6 +32,8 @@ window.onload = () => {
     let timeFunction;
 
     startButton.addEventListener("click", () => {
+        startButton.classList.add("hidden");
+        pauseButton.classList.remove("hidden");
         if(isWork){
             
         minute =  mode < 11? "0" + (mode-1) : mode-1;
@@ -111,6 +114,7 @@ window.onload = () => {
     
 pomodoroSession.addEventListener("click", () => {
     clearInterval(timeFunction);
+    startButton.classList.remove("hidden");
     mode = pomodoro;
     document.getElementById("minute").innerHTML = mode;
     document.getElementById("second").innerHTML = seconds;
@@ -122,6 +126,7 @@ pomodoroSession.addEventListener("click", () => {
 });
 
 shortBreakSession.addEventListener("click", () => {
+    startButton.classList.remove("hidden");
     clearInterval(timeFunction);
     mode = shortBreak;
     document.getElementById("minute").innerHTML = mode;
@@ -134,6 +139,7 @@ shortBreakSession.addEventListener("click", () => {
 });
 
 longBreakSession.addEventListener("click", () => {
+    startButton.classList.remove("hidden");
     clearInterval(timeFunction);
     mode = longBreak;
     document.getElementById("minute").innerHTML = mode;
