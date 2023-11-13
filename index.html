@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-blue-900 text-amber-300">
@@ -13,30 +14,30 @@
         <h1 class="mt-6 mb-16 text-2xl uppercase font-bold text-center">Pomomato</h1>
         <div class="w-3/5 h-1/2 mx-auto  bg-blue-800 shadow-2xl rounded-lg ring-1 ring-cyan-500 shadow-cyan-500 pb-6">
             <nav class="w-full mx-auto flex justify-between ">
-                <a href="#"
-                    class="text-center w-1/3 py-1 hover:bg-blue-700 transition-all duration-200 ease-in">Pomodoro</a>
-                <a href="#" class="text-center w-1/3 py-1 hover:bg-blue-700 transition-all duration-200 ease-in">Short
-                    Break</a>
-                <a href="#" class="text-center w-1/3 py-1 hover:bg-blue-700 transition-all duration-200 ease-in">Long
-                    Break</a>
+                <button id="pomodoro-session"
+                    class="text-center w-1/3 py-1 rounded-l-lg hover:bg-blue-700 transition-all duration-200 ease-in">Pomodoro</button>
+                <button id="short-break-session"
+                    class="text-center w-1/3 py-1  hover:bg-blue-700 transition-all duration-200 ease-in">Short
+                    Break</button>
+                <button id="long-break-session"
+                    class="text-center w-1/3 py-1  hover:bg-blue-700 transition-all duration-200 ease-in">Long
+                    Break</button>
             </nav>
-            <div class="w-full h-3/5 mt-12  flex flex-col justify-center ">
-                <p class="text-9xl mb-5 font-semibold text-center ">25:00</p>
+            <div
+                class="w-full h-3/5 mt-8 pb-3  flex border items-center justify-center text-9xl mb-5 font-semibold text-center">
+                <span id="minute">25</span>
+                <span>:</span>
+                <span id="second">00</span>
             </div>
             <div class=" w-full h-12 mt-3 flex justify-center">
-                <button class="w-2/5 h-full text-2xl uppercase font-semibold rounded-xl ring-1 ring-amber-300 bg-blue-700 hover:bg-blue-600 transition-all duration-200 ease-in ">Start
+                <button id="start"
+                    class="w-2/5 h-full text-2xl uppercase font-semibold rounded-xl ring-1 ring-amber-300 bg-blue-700 hover:bg-blue-600 transition-all duration-200 ease-in ">Start
                 </button>
             </div>
         </div>
-        
-    </section>
 
-    <svg width="150" height="150">
-        <circle cx="50" cy="60" r="40" stroke="green" stroke-width="4" fill="yellow">
-    </svg>
-    <svg class="w-36 h-36 bg-slate-50 ">
-        <rect class="w-16 h-16 fill-red-500" x="40" y="40">
-    </svg>
+    </section>
+    <script src="script.js"></script>
 </body>
 
 </html>
