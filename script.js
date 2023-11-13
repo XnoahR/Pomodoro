@@ -1,5 +1,5 @@
-var pomodoro = 1;
-var shortBreak = 5;
+var pomodoro = 10;
+var shortBreak = "05";
 var longBreak = 15;
 
 var totalSession = 0;
@@ -26,6 +26,7 @@ window.onload = () => {
     let timeFunction;
 
     startButton.addEventListener("click", () => {
+        if(isWork){
         let seconds = "3";
         let minute = mode - 1;
     
@@ -37,7 +38,7 @@ window.onload = () => {
             if (seconds < 10) {
                 seconds = "0" + seconds;
             }
-            if(minute === 0 && seconds === "0-1"){
+            if(minute === "00" && seconds === "0-1"){
                 seconds = "00";
                 isWork = false;
                 totalSession++;
@@ -62,5 +63,37 @@ window.onload = () => {
                 seconds = "59";
             }
         }, 1000);
+    }
+
+    if(!isWork){
+        let seconds = "3";
+        let minute = mode - 1;
+    
+        timeFunction = setInterval(function () {
+            document.getElementById("minute").innerHTML = minute;
+            document.getElementById("second").innerHTML = seconds;
+    
+            seconds--;
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            if(minute === "00" && seconds === "0-1"){
+                seconds = "00";
+                isWork = true;
+                mode = pomodoro;
+                document.getElementById("minute").innerHTML = pomodoro;
+                seconds = "00";
+                clearInterval(timeFunction);
+
+            }
+            if (seconds === "0-1") {
+                minute--;
+                if (minute < 10 && minute >= 0) {
+                    minute = "0" + minute;
+                }
+                seconds = "59";
+            }
+        }, 1000);
+    }
     });
     
